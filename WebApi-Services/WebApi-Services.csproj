@@ -9,6 +9,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApi-DataAccess\WebApi-DataAccess.csproj" />
+    <ProjectReference Include="..\WebApi-Helpers\WebApi-Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Contrato\" />
+    <Folder Include="Implementacion\" />
   </ItemGroup>
 
 </Project>
