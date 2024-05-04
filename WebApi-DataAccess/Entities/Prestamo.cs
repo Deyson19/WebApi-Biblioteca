@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi_DataAccess.Entities
 {
@@ -11,7 +8,6 @@ namespace WebApi_DataAccess.Entities
         public int Id { get; set; }
         [MaxLength(10)]
         public string Isbn { get; set; }
-        [ForeignKey("UsuarioId")]
         [MaxLength(10)]
         public string IdentificacionUsuario { get; set; }
         public required DateTime FechaPrestamo { get; set; }
