@@ -12,8 +12,4 @@
     <ProjectReference Include="..\WebApi-Helpers\WebApi-Helpers.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementacion\" />
-  </ItemGroup>
-
 </Project>
