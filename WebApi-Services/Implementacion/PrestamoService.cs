@@ -66,8 +66,15 @@ namespace WebApi_Services.Implementacion
 
         public async Task<bool> UsuarioTienePrestamo(string idUsuario)
         {
-            var prestamo = await _dbContext.Prestamos.Where(x => x.FechaPrestamo > DateTime.Now).FirstOrDefaultAsync(x => x.IdentificacionUsuario.ToLower() == idUsuario.ToLower());
-            return prestamo != null;
+            var prestamo = await _dbContext.Prestamos.Where(x => x.FechaMaximaDevolucion < DateTime.Now).FirstOrDefaultAsync(x => x.IdentificacionUsuario.ToLower() == idUsuario.ToLower());
+            if (prestamo != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private async Task<Prestamo> GetPrestamo(int id)
