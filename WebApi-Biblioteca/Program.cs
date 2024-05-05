@@ -6,9 +6,16 @@ using WebApi_Services.Implementacion;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("NameConnection");
 
-builder.Services.AddDbContext<BibliotecaDbContext>(options => options.UseSqlServer(connectionString));
+//Usando sql server
+var connectionString_SQLServer = builder.Configuration.GetConnectionString("NameConnection");
+builder.Services.AddDbContext<BibliotecaDbContext>(options => options.UseSqlServer(connectionString_SQLServer));
+
+
+//usando postgre
+var connectionString_Postgre = builder.Configuration.GetConnectionString("Postgres");
+//builder.Services.AddDbContext<BibliotecaDbContext>(op => op.UseNpgsql(connectionString_Postgre));
+
 
 // agregar servicios
 builder.Services.AddScoped<IUnidadTrabajo, UnidadTrabajo>();
