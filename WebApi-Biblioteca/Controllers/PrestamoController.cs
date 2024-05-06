@@ -107,7 +107,7 @@ namespace WebApi_Biblioteca.Controllers
             var eliminar = await _unidadTrabajo.Prestamo.Eliminar(idPrestamo);
             if (eliminar.IsSuccess)
             {
-                return StatusCode(StatusCodes.Status200OK, eliminar);
+                return StatusCode(StatusCodes.Status200OK, eliminar.IsSuccess);
             }
             return BadRequest(new { mensaje = eliminar.Message });
         }
@@ -119,7 +119,7 @@ namespace WebApi_Biblioteca.Controllers
                 var prestamo = await _unidadTrabajo.Prestamo.Actualizar(model);
                 if (prestamo.IsSuccess)
                 {
-                    return Ok(prestamo);
+                    return Ok(prestamo.Result);
                 }
                 return NotFound(new {mensaje= prestamo.Message });
             }
