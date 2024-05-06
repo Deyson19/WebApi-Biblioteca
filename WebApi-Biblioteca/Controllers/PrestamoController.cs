@@ -46,6 +46,7 @@ namespace WebApi_Biblioteca.Controllers
             {
                 return BadRequest();
             }
+            
             var existeTipoUsuario = await ObtenerTipoUsuario(prestamo.TipoUsuarioId);
             if (existeTipoUsuario == null)
             {
@@ -96,7 +97,34 @@ namespace WebApi_Biblioteca.Controllers
             }
             return BadRequest(resultado.Message);
         }
-
+        [HttpDelete("{idPrestamo}")]
+        public async Task<IActionResult> Delete(int idPrestamo)
+        {
+            if (idPrestamo ==0)
+            {
+                return BadRequest(new { mensaje = "El id no es correcto" });
+            }
+            var eliminar = await _unidadTrabajo.Prestamo.Eliminar(idPrestamo);
+            if (eliminar.IsSuccess)
+            {
+                return StatusCode(StatusCodes.Status200OK, eliminar);
+            }
+            return BadRequest(eliminar.Message);
+        }
+        [HttpPut("{idPrestamo}")]
+        public async Task<IActionResult> Update(int idPrestamo,[FromBody] ActualizarPrestamoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var prestamo = await _unidadTrabajo.Prestamo.Actualizar(model);
+                if (prestamo.IsSuccess)
+                {
+                    return Ok(prestamo);
+                }
+                return NotFound(prestamo.Message);
+            }
+            return BadRequest(new { mensaje = "No es correcto el modelo" });
+        }
 
 
 

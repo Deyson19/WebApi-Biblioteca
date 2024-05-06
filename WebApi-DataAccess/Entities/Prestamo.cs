@@ -24,13 +24,18 @@ namespace WebApi_DataAccess.Entities
         //[MaxLength(1, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
         public int TipoUsuarioId { get; set; }
     }
-    public class ObtenerPrestamoViewModel
+    public class ActualizarPrestamoViewModel
     {
         public int Id { get; set; }
+
+        [MaxLength(6, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
         public string Isbn { get; set; }
+        [MaxLength(10, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
         public string IdentificacionUsuario { get; set; }
-        public DateTime FechaMaximaDevolucion { get; set; }
+        //[MaxLength(1, ErrorMessage = "El campo {0} no puede superar los {1} caracteres")]
+        public int TipoUsuarioId { get; set; }
     }
+    
     public class ObtenerPrestamoPorId
     {
         public int Id { get; set; }
