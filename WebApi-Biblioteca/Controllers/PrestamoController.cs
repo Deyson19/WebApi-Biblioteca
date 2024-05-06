@@ -109,7 +109,7 @@ namespace WebApi_Biblioteca.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK, eliminar);
             }
-            return BadRequest(eliminar.Message);
+            return BadRequest(new { mensaje = eliminar.Message });
         }
         [HttpPut("{idPrestamo}")]
         public async Task<IActionResult> Update(int idPrestamo,[FromBody] ActualizarPrestamoViewModel model)
@@ -121,7 +121,7 @@ namespace WebApi_Biblioteca.Controllers
                 {
                     return Ok(prestamo);
                 }
-                return NotFound(prestamo.Message);
+                return NotFound(new {mensaje= prestamo.Message });
             }
             return BadRequest(new { mensaje = "No es correcto el modelo" });
         }
