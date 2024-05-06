@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using WebApi_DataAccess;
 using WebApi_Services.Contrato;
 using WebApi_Services.Implementacion;
@@ -20,21 +21,25 @@ var connectionString_Postgre = builder.Configuration.GetConnectionString("Postgr
 // agregar servicios
 builder.Services.AddScoped<IUnidadTrabajo, UnidadTrabajo>();
 
+//HAbilitar los cors
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
+builder.Services.AddCors(op =>
 {
-    options.AddDefaultPolicy(builder =>
+    /*Mejor practica para cors*/
+    op.AddPolicy("angularApp", builder =>
     {
-        builder.WithOrigins("http:localhost:4200")
+        builder.WithOrigins("http://localhost:4200")
             .SetIsOriginAllowedToAllowWildcardSubdomains()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 
 
 var app = builder.Build();
@@ -45,8 +50,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors();
 
+app.UseCors("angularApp");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
