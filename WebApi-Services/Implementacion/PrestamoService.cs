@@ -34,7 +34,7 @@ namespace WebApi_Services.Implementacion
                 return new Respuesta<Prestamo>
                 {
                     IsSuccess = true,
-                    Message = "Se el prestamo ha sido actualizado",
+                    Message = "El prestamo ha sido actualizado",
                     Result = prestamo
                 };
             }

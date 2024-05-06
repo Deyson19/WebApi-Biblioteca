@@ -114,6 +114,10 @@ namespace WebApi_Biblioteca.Controllers
         [HttpPut("{idPrestamo}")]
         public async Task<IActionResult> Update(int idPrestamo,[FromBody] ActualizarPrestamoViewModel model)
         {
+            if (idPrestamo ==0 || idPrestamo != model.Id)
+            {
+                return BadRequest("Id no es correcto");
+            }
             if (ModelState.IsValid)
             {
                 var prestamo = await _unidadTrabajo.Prestamo.Actualizar(model);
